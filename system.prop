@@ -3,3 +3,10 @@ ro.adb.secure=0
 #Disable for everyone for the moment
 ro.sys.sdcardfs=0
 persist.sys.overlay.nightmode=true
+#Alex was here
+debug.hwc.force_gpu=1
+debug.egl.hw=0
+debug.sf.hw=0
+persist.sys.ui.hw=false
+debug.composition.type=gpu
+logcat.live=disable
