@@ -39,6 +39,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_width=2048 \
     ro.hwui.text_large_cache_height=1024
 
+# Audio
+USE_XML_AUDIO_POLICY_CONF := 1
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_gains.xml:system/etc/mixer_gains.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_r02.xml:system/etc/mixer_paths_r02.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_gains_r02.xml:system/etc/mixer_gains_r02.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_r08.xml:system/etc/mixer_paths_r08.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_gains_r08.xml:system/etc/mixer_gains_r08.xml
+
 # Graphics
 TARGET_USES_HWC2 := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
