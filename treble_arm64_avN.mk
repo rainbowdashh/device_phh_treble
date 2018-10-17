@@ -55,6 +55,10 @@ TARGET_USES_HWC2 := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 OVERRIDE_RS_DRIVER := libRSDriverArm.so
 
+# Fingerprint
+PRODUCT_PACKAGES += \
+    fingerprint.exynos5
+
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := 560dpi
