@@ -52,7 +52,16 @@ changeKeylayout() {
         cp /system/phh/samsung-sec_touchscreen.kl /mnt/phh/keylayout/sec_touchscreen.kl
         chmod 0644 /mnt/phh/keylayout/gpio_keys.kl /mnt/phh/keylayout/sec_touchscreen.kl
     fi
-
+    if getprop ro.vendor.build.fingerprint | \
+        grep -qE -e ".*(crown|star)[q2]*lte.*"  -e ".*(SC-0[23]K|SCV3[89]).*";then
+        # Override vendor mixer_paths/gains
+      mount none /system/phh/s9_audio/mixer_paths.xml /vendor/etc/mixer_paths.xml bind
+      mount none /system/phh/s9_audio/mixer_gains.xml /vendor/etc/mixer_gains.xml bind
+      mount none /system/phh/s9_audio/mixer_paths_r02.xml /vendor/etc/mixer_paths_r02.xml bind
+      mount none /system/phh/s9_audio/mixer_gains_r02.xml /vendor/etc/mixer_gains_r02.xml bind
+      mount none /system/phh/s9_audio/mixer_paths_r08.xml /vendor/etc/mixer_paths_r08.xml bind
+      mount none /system/phh/s9_audio/mixer_gains_r08.xml /vendor/etc/mixer_gains_r08.xml bind
+    fi
     if getprop ro.vendor.build.fingerprint |grep -q Xiaomi/polaris;then
         cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
         chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
