@@ -77,9 +77,9 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/samsung-sec_touchscreen.kl:system/phh/samsung-sec_touchscreen.kl
 
 PRODUCT_COPY_FILES += \
-     device/phh/treble/files/s9_audio/audio/mixer_paths.xml:system/phh/s9_audio/mixer_paths.xml \
-     device/phh/treble/files/s9_audio/audio/mixer_gains.xml:system/phh/s9_audio/mixer_gains.xml \
-     device/phh/treble/files/s9_audio/audio/mixer_paths_r02.xml:system/phh/s9_audio/mixer_paths_r02.xml \
-     device/phh/treble/files/s9_audio/audio/mixer_gains_r02.xml:system/phh/s9_audio/mixer_gains_r02.xml \
-     device/phh/treble/files/s9_audio/audio/mixer_paths_r08.xml:system/phh/s9_audio/mixer_paths_r08.xml \
-     device/phh/treble/files/s9_audio/audio/mixer_gains_r08.xml:system/phh/s9_audio/mixer_gains_r08.xml
+     device/phh/treble/files/s9_audio/mixer_paths.xml:system/phh/s9_audio/mixer_paths.xml \
+     device/phh/treble/files/s9_audio/mixer_gains.xml:system/phh/s9_audio/mixer_gains.xml \
+     device/phh/treble/files/s9_audio/mixer_paths_r02.xml:system/phh/s9_audio/mixer_paths_r02.xml \
+     device/phh/treble/files/s9_audio/mixer_gains_r02.xml:system/phh/s9_audio/mixer_gains_r02.xml \
+     device/phh/treble/files/s9_audio/mixer_paths_r08.xml:system/phh/s9_audio/mixer_paths_r08.xml \
+     device/phh/treble/files/s9_audio/mixer_gains_r08.xml:system/phh/s9_audio/mixer_gains_r08.xml
