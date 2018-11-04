@@ -3,21 +3,16 @@ ro.adb.secure=0
 #Disable for everyone for the moment
 ro.sys.sdcardfs=0
 persist.sys.overlay.nightmode=true
+
 #Alex was here
 debug.sf.enable_hwc_vds=1
 debug.sf.hw=1
 debug.sf.latch_unsignaled=1
 debug.gralloc.enable_fb_ubwc=1
 dev.pm.dyn_samplingrate=1
-persist.demo.hdmirotationlock=false
 sdm.perf_hint_window=50
 persist.hwc.enable_vds=1
 sched.colocate.enable=1
 sdm.debug.disable_skip_validate=1
-profiler.force_disable_err_rpt=1
-profiler.force_disable_ulog=1
-ro.kernel.android.checkjni=0
-ro.kernel.checkjni=0
 dalvik.vm.heapsize=36m
-persist.demo.hdmirotationlock=false
 sdm.debug.disable_partial_split=1
