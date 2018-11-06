@@ -57,18 +57,14 @@ changeKeylayout() {
     if getprop ro.vendor.build.fingerprint |grep -iq -e xiaomi/polaris -e xiaomi/sirius -e xiaomi/dipper -e xiaomi/wayne -e xiaomi/jasmine;then
         cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
         chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
+        cp /system/phh/empty /mnt/phh/keylayout/uinput-fpc.kl
+        chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
         changed=true
     fi
 
     if getprop ro.vendor.build.fingerprint |grep -qi oneplus/oneplus6/oneplus6;then
         cp /system/phh/oneplus6-synaptics_s3320.kl /mnt/phh/keylayout/synaptics_s3320.kl
         chmod 0644 /mnt/phh/keylayout/synaptics_s3320.kl
-        changed=true
-    fi
-
-    if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/wayne -e xiaomi/jasmine;then
-        cp /system/phh/empty /mnt/phh/keylayout/uinput-fpc.kl
-        chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
         changed=true
     fi
 
@@ -146,7 +142,7 @@ if getprop ro.vendor.build.fingerprint |grep -q -i -e xiaomi/wayne -e xiaomi/jas
     setprop persist.imx376_ofilm.light.lux 280
 fi
 
-for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so;do
+for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so /vendor/lib/libmtk-ril.so /vendor/lib64/libmtk-ril.so;do
     [ ! -f $f ] && continue
     ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
     b="$(echo "$f"|tr / _)"
@@ -162,7 +158,7 @@ done
 mount -o bind /system/phh/empty /vendor/overlay/SysuiDarkTheme/SysuiDarkTheme.apk || true
 mount -o bind /system/phh/empty /vendor/overlay/SysuiDarkTheme/SysuiDarkThemeOverlay.apk || true
 
-if grep -qF 'PowerVR Rogue GE8100' /vendor/lib/egl/GLESv1_CM_mtk.so;then
+if grep -qF 'PowerVR Rogue GE8100' /vendor/lib/egl/GLESv1_CM_mtk.so || grep -qF 'PowerVR Rogue' /vendor/lib/egl/libGLESv1_CM_mtk.so;then
 	setprop debug.hwui.renderer opengl
 fi
 
@@ -177,4 +173,23 @@ fi
 
 if busybox_phh unzip -p /vendor/app/ims/ims.apk classes.dex |grep -qF -e Landroid/telephony/ims/feature/MmTelFeature -e Landroid/telephony/ims/feature/MMTelFeature;then
     mount -o bind /system/phh/empty /vendor/app/ims/ims.apk
+fi
+
+if getprop ro.hardware |grep -qF samsungexynos;then
+	setprop debug.sf.latch_unsignaled 1
+fi
+
+if getprop ro.vendor.build.fingerprint | grep -qE -e ".*(crown|star)[q2]*lte.*"  -e ".*(SC-0[23]K|SCV3[89]).*";then
+	for f in /vendor/lib/libfloatingfeature.so /vendor/lib64/libfloatingfeature.so;do
+		[ ! -f $f ] && continue
+		ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
+		b="$(echo "$f"|tr / _)"
+
+		cp -a $f /mnt/phh/$b
+		sed -i \
+			-e 's;/system/etc/floating_feature.xml;/system/ph/sam-9810-flo_feat.xml;g' \
+			/mnt/phh/$b
+		chcon "$ctxt" /mnt/phh/$b
+		mount -o bind /mnt/phh/$b $f
+	done
 fi
